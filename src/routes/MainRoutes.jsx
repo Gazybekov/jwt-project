@@ -3,6 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import Register from "../components/auth/Register";
 import Login from "../components/auth/Login";
 import RegisterSuccess from "../components/auth/RegisterSuccess";
+import AddProduct from "../components/products/AddProduct";
+import ProductList from "../components/products/ProductList";
+import EditProduct from "../components/products/EditProduct";
 
 const MainRoutes = () => {
   return (
@@ -11,6 +14,9 @@ const MainRoutes = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register-success" element={<RegisterSuccess />} />
+      <Route path="/addProduct" element={<AddProduct />} />
+      <Route path="/products" element={<ProductList />} />
+      <Route path="/edit/:id" element={<EditProduct />} />
       <Route path="*" element={<h1>NOT FOUND PAGE</h1>} />
     </Routes>
   );
