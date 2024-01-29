@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../../context/ProductContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const { createProduct, categories, getCategories } = useProducts();
   console.log(categories);
+  const navigate = useNavigate();
   useEffect(() => {
     getCategories();
   }, []);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -20,6 +23,7 @@ const AddProduct = () => {
     newProduct.append("image", img);
     newProduct.append("category", category);
     createProduct(newProduct);
+    navigate("/products");
   };
   return (
     <div>
