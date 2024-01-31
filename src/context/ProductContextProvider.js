@@ -2,7 +2,6 @@ import React, { createContext, useContext, useReducer } from "react";
 import { ACTIONS, API } from "../helpers/const";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 const productContext = createContext();
 export const useProducts = () => useContext(productContext);
 const INIT_STATE = {

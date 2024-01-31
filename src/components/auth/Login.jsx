@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContextProvider";
 import Loader from "../homePage/Loader";
 
 const Login = () => {
-  const { handleLogin, loading } = useAuth();
+  const { handleLogin, loading, error } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSave = () => {
@@ -22,6 +22,7 @@ const Login = () => {
   return (
     <div>
       <h1>Login Page</h1>
+      {error ? <h2>{error}</h2> : null}
       <input
         onChange={(e) => setEmail(e.target.value)}
         placeholder="email"

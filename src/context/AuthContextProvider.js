@@ -8,14 +8,18 @@ const AuthContextProvider = ({ children }) => {
   const [error, setError] = useState(false);
   const [currenUser, setCurrentUser] = useState(null);
   const [loading, setloading] = useState(false);
+
   const navigate = useNavigate();
   //! REGISTER
   const handleRegister = async (formData) => {
     try {
+      setloading(true);
       await axios.post(`${API}/account/register/`, formData);
       navigate("/register-success");
     } catch (error) {
-      setError(error);
+      setError(Object.values(error.response.data));
+    } finally {
+      setloading(false);
     }
   };
   //! LOGIN
@@ -23,13 +27,14 @@ const AuthContextProvider = ({ children }) => {
     try {
       setloading(true);
       const res = await axios.post(`${API}/account/login/`, formData);
+      console.log(res);
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       console.log(res);
       navigate("/");
       setCurrentUser(email);
     } catch (error) {
-      setError(error);
+      setError(Object.values(error.response.data));
     } finally {
       setloading(false);
     }
@@ -69,6 +74,7 @@ const AuthContextProvider = ({ children }) => {
     currenUser,
     handleLogout,
     checkAuth,
+    error,
   };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
